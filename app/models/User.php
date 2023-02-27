@@ -3,13 +3,19 @@ namespace app\models;
 
 class User extends \app\core\Model{
 
-	public $user_id;
-	public $username;
+	public $user_id;		//PK
+	public $username;		//Unique
 	public $password_hash;
 
 	public function getByUsername($username)
 	{
+		$SQL = 'SELECT * FROM User WHERE  username=:username';
 
+		$STH = $this->connection->prepare($SQL);
+		$STH->execute(['username' => $username]);
+		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\\models\\User');
+
+		return $STH->fetch();
 	}
 
 	public function insert()
