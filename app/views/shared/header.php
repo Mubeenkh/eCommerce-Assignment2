@@ -15,9 +15,21 @@
 </head>
 
 <body>
-	
-	
-	<div class="container">
+
+	<div class="d-flex">
+
+
+<!-- ///////////////////////////////////////////////////////// -->
+		<!-- <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;"> -->
+			<ul>
+		            
+		        <li><a href="/User/index">Login</a></li>
+		        <li><a href="/User/register">Register</a></li>
+		        <li><a href="/User/profile">User Profile</a></li>
+
+		    </ul>
+		<!-- </div> -->
+<!-- //////////////////////////////	 -->
 		<?php 
 			if(isset($_GET['error'])){
 				echo '<div class="alert alert-danger">' . $_GET['error'] . '</div>';
@@ -25,6 +37,5 @@
 			if(isset($_GET['success'])){
 				echo '<div class="alert alert-success">' . $_GET['success'] . '</div>';
 			}
-
 
 		?>

@@ -3,19 +3,18 @@ namespace app\core;
 
 class App
 {
-	
 	function __construct()
 	{	
 
 		$request = $this->parseURL($_GET['url'] ?? '');
 
+		//Default
 		$controller = 'User';
 		$method = 'index';
 		$params = [];
 
-		if(file_exists('app/controllers/'.$request[0] .'.php')) 
+		if(file_exists('app/controllers/' . $request[0] . '.php')) 
 		{
-
 			$controller = $request[0];
 			unset($request[0]); 
 
@@ -30,7 +29,7 @@ class App
 			unset($request[1]);
 		}
 		
-		$params = array_values($request);   //array_values(
+		$params = array_values($request);   
 		call_user_func_array([$controller, $method], $params);
 	}
 
