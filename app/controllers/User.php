@@ -94,8 +94,8 @@ class User extends \app\core\Controller{
 		}
 		echo('Finish the publication model and controller');
 		$publication = new \app\models\Publication();
-		$publications = $publication->getAllForUser($_SESSION['user_id']);
-		$this-> view('User/profile',$publications);
+		$publications = $publication->getAll($_SESSION['user_id']);
+		$this->view('User/profile',$publications);
 
 	}
 

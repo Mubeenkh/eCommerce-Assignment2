@@ -25,7 +25,7 @@
 		            
 		        <li><a href="/User/index">Login</a></li>
 		        <li><a href="/User/register">Register</a></li>
-		        <li><a href="/User/profile">User Profile</a></li>
+		        <li><a href="/User/profile">User Profedefededile</a></li>
 
 		    </ul>
 		<!-- </div> -->

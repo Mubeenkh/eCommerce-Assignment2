@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2023 at 07:54 PM
+-- Generation Time: Mar 05, 2023 at 06:40 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -39,6 +39,20 @@ CREATE TABLE `follow` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `person`
+--
+
+DROP TABLE IF EXISTS `person`;
+CREATE TABLE `person` (
+  `person_id` int(11) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `middle_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `profile`
 --
 
@@ -48,6 +62,21 @@ CREATE TABLE `profile` (
   `first_name` varchar(50) NOT NULL,
   `middle_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `publication`
+--
+
+DROP TABLE IF EXISTS `publication`;
+CREATE TABLE `publication` (
+  `publication_id` int(11) NOT NULL,
+  `profile_id` int(11) NOT NULL,
+  `picture` varchar(128) NOT NULL,
+  `caption` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -64,6 +93,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password_hash`) VALUES
+(1, 'Rachelle', '$2y$10$KlfwkiLaKeYSIvjJZTRddOlVAXDf4AS7ryF.ZR2Q4j9PmphzfNk9.');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -71,13 +107,27 @@ CREATE TABLE `user` (
 -- Indexes for table `follow`
 --
 ALTER TABLE `follow`
-  ADD PRIMARY KEY (`follower_id`,`followed_id`);
+  ADD PRIMARY KEY (`follower_id`,`followed_id`),
+  ADD KEY `profile_to_followed` (`followed_id`);
+
+--
+-- Indexes for table `person`
+--
+ALTER TABLE `person`
+  ADD PRIMARY KEY (`person_id`);
 
 --
 -- Indexes for table `profile`
 --
 ALTER TABLE `profile`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `publication`
+--
+ALTER TABLE `publication`
+  ADD PRIMARY KEY (`publication_id`),
+  ADD KEY `publication_to_profile` (`profile_id`);
 
 --
 -- Indexes for table `user`
@@ -91,16 +141,45 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `profile`
+-- AUTO_INCREMENT for table `person`
 --
-ALTER TABLE `profile`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `person`
+  MODIFY `person_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `publication`
+--
+ALTER TABLE `publication`
+  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `follow`
+--
+ALTER TABLE `follow`
+  ADD CONSTRAINT `profile_to_followed` FOREIGN KEY (`followed_id`) REFERENCES `profile` (`user_id`),
+  ADD CONSTRAINT `profile_to_follower` FOREIGN KEY (`follower_id`) REFERENCES `profile` (`user_id`);
+
+--
+-- Constraints for table `profile`
+--
+ALTER TABLE `profile`
+  ADD CONSTRAINT `profile_to_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `publication`
+--
+ALTER TABLE `publication`
+  ADD CONSTRAINT `publication_to_profile` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
