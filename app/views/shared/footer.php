@@ -1,5 +1,5 @@
 	
-		
+		</div>
 		<div>
 			Should Display Followers
 		</div>

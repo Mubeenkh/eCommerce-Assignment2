@@ -16,7 +16,7 @@ class Publication extends \app\core\Model{
 	}
 
 	// - As a person or user, I can see a list of all publications, most recent first.
-	public function getAllPublications()
+	public function getAll()
 	{
 		//order by timestamp desc to get the most recent published post
 		$SQL = 'SELECT * FROM publication 
@@ -35,7 +35,7 @@ class Publication extends \app\core\Model{
 	}
 
 	// - As a person or user, I can view other user profile pages.
-	public function 
+	//public function 
 
 
 	
