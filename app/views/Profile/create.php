@@ -19,14 +19,22 @@
 	</div>
 
 	<div class="form-group row">
+
 		<label class="col-sm-2 col-form-label">Middle Name:</label>
+
 		<div class="col-sm-10">
 			<input class="form-control" name="middle_name"></input>
 		</div>
+
 		<br>
 	</div>
 
+	<label>Profile Picture:</label><br>
+    <input type="file" name="profilePicture"><br>
+	
+
 	<input  type="submit" name="action" value="Create profile">
+
 </form>
 
 	<a href="/Profile/index">Back</a>

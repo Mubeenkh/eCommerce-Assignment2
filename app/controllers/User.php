@@ -21,7 +21,7 @@ class User extends \app\core\Controller{
 				{
 
 					$_SESSION['user_id'] = $user->user_id;  
-					header('location:/User/profile');
+					header('location:/Main/index');
 
 				}else{
 
@@ -92,11 +92,9 @@ class User extends \app\core\Controller{
 			return;
 
 		}
-		echo('Finish the publication model and controller');
-		$publication = new \app\models\Publication();
-		$publications = $publication->getAll($_SESSION['user_id']);
-		$this->view('User/profile',$publications);
-
+		//When user clicks on see profile, it sends them to their profile
+		header('location:/Profile/index');
+		
 	}
 
 	

@@ -21,13 +21,14 @@
 
 <!-- ///////////////////////////////////////////////////////// -->
 		<!-- <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;"> -->
-			<ul>
-		            
-		        <li><a href="/User/index">Login</a></li>
-		        <li><a href="/User/register">Register</a></li>
-		        <li><a href="/User/profile">User Profedefededile</a></li>
+		
+		<ul>
+		    <a href="/Main/index" ><h2>CliqueBait</h2></a>     
+			<li><a href="/User/index">Login</a></li>
+			<li><a href="/User/register">Register</a></li>
+			<li><a href="/User/profile">User Profile</a></li>
 
-		    </ul>
+		</ul>
 		<!-- </div> -->
 <!-- //////////////////////////////	 -->
 		<?php 

@@ -26,17 +26,13 @@ class Publication extends \app\core\Model{
 	}
 
 	// - As a person or user, I can see a list of all publications, most recent first.
-	public function getAll($user_id)
+	public function getAll()
 	{
 		//order by timestamp desc to get the most recent published post
 		$SQL = 'SELECT * FROM publication 
 				ORDER BY `timestamp` DESC';
 
 		$STH = $this->connection->prepare($SQL);
-
-		$data = ['profile_id'=>$profile_id,
-					'picture'=>$picture,
-					'caption'=> $caption];
 
 		$STH->execute($data); 
 		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\\models\\Publication');
@@ -48,9 +44,12 @@ class Publication extends \app\core\Model{
 	public function search($search)
 	{
 
-		$SQL= 'SELECT * WHERE $search LIKE caption';
+		$SQL= 'SELECT * FROM publication WHERE caption LIKE :search';
 
 		$STH = $this->connection->prepare($SQL);
+		$STMT->execute(['searchTerm'=>"%$searchTerm%"]);
+		$STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Publication');
+		return $STMT->fetchAll();
 
 	}
 
