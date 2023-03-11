@@ -1,8 +1,10 @@
 	
 		</div>
-		<div>
-			Should Display Followers
+
+		<div style="width: 500px;">
+			
 		</div>
+		
 	</div>
 
 </body>

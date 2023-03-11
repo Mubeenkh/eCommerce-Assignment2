@@ -24,10 +24,15 @@ class User extends \app\core\Model{
 
 		$STH = $this->connection->prepare($SQL);
 
-		$STH->execute(['username' => $this->username,
-			'password_hash' => $this->password_hash]);
+		$STH->execute(
+			[
+				'username' => $this->username,
+				'password_hash' => $this->password_hash
+			]
+		);
 
 		return $this->connection->lastInsertId();
 	}
+
 
 }

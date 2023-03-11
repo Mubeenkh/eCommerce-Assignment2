@@ -1,13 +1,15 @@
-<?php
+<?php 
 namespace app\controllers;
-
-class Main extends \app\core\Controller{
+//name of this controller is Main,we wanna make sure Main calls the view class
+// which is why we extends Controller
+class Main extends \app\core\Controller{ 
 	
-	public function index()
-	{
+	public function index(){
 
-		$this->view('Main/index');
-		
+		$publication = new \app\models\Publication();
+		$publications = $publication->getAll();
+		$this->view('Main/index', $publications);
+
 	}
 
 }

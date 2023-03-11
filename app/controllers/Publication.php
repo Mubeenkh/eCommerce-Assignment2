@@ -3,34 +3,41 @@ namespace app\controllers;
 
 class Publication extends \app\core\Controller{
 
-	// As a user, I can create a publication (upload my picture with its caption).
+	#[\app\filters\Login]
+	public function create(){
 
-	
- 	public function create()
- 	{
-
- 		
 		if(isset($_POST['action']))
 		{
-			
+
 			$publication = new \app\models\Publication();
-			
+
+			$publication->profile_id = $_SESSION['user_id'];//FK ///************might be user_id
 			$publication->caption = $_POST['caption'];
+			// $filename = $this->saveFile($_FILES['picture']);
 
-			$publication->profile_id = $_SESSION['profile_id'];//FK
+		///////////   Related to the picture   ///////////
 
-			$filename = $this->saveFile($_FILES['picture']);
+            $uploadedPicture = $this->uploadPicture($_SESSION['user_id']);
 
-			if($filename)
+            if(isset($uploadedPicture['target_file']))
+            {
+                $publication->picture = $uploadedPicture["target_file"];
+            }
+
+            $uploadMessage = $uploadedPicture["upload_message"] == 'success' ? '' : '&error=Something went wrong '.$uploadedPicture["upload_message"];
+
+        ///////////   Related to the picture   ///////////
+
+            $success = $publication->insert();
+
+			if($success)
 			{
 
-				$publication->picture = $filename;
-				$publication->insert();
-				header('location:/Profile/index/');
+				header('location:/Profile/index?success=Post created.' .$uploadMessage);
 
 			}else{
 
-				header('location:/Publication/create/');
+				header('location:/Publication/create?error=Something went wrong. Maybe file type'.$uploadMessage);
 
 			}
 			
@@ -39,54 +46,66 @@ class Publication extends \app\core\Controller{
 			$this->view('Publication/create');
 
 		}
+	}
 
- 	}
+	public function uploadPicture($user_id)
+	{
 
-	// As a user, I can edit my publication (only the picture caption).
-	//i need to pass publication_id to find the post i upload
- 	public function edit($publication_id)
- 	{
+		$uploadedFile = array();
 
-		$publication = new \app\models\Publication();
+        if(isset($_FILES["postPicture"]) && ($_FILES["postPicture"]["error"] == UPLOAD_ERR_OK))
+        {
 
-		$publication = $publication->get($publication_id);
+            $info = getimagesize($_FILES["postPicture"]["tmp_name"]);
 
-		if(isset($_POST['action']) && $publication->profile_id == $_SESSION['profile_id']){
-			
-			$publication->caption = $_POST['caption'];
-			$publication->update();
+            $allowedTypes = ["jpg", "png", "gif"];
 
-			header('location:/Profile/index/');
+            $fileName = basename($_FILES["postPicture"]["name"]);
 
-		}else{
+            $fileType = strtolower(pathinfo($fileName,PATHINFO_EXTENSION));
 
-			$this->view('Publication/edit', $publication);
+            if($info == false){
 
-		}
+                // header('location:/Profile/index?error=Bad file format!');   
+                $uploadedFile["upload_message"] = "Bad image file format!";
+                $uploadedFile["target_file"] = null;
 
- 	}
 
-	// As a user, I can delete my publications.
-	//i need to pass publication_id to find the post i upload
- 	public function delete($publication_id)
- 	{
+            }else if(!in_array($fileType, $allowedTypes))
+            {//File uploaded, but check the image file type
+               
+               // header('location:/Profile/index?error=The file type is not accepted!'); 
+            	$uploadedFile["upload_message"] = "The image file type is not accepted!";
+                $uploadedFile["target_file"] = null;
 
- 		$publication = new \app\models\Publication();
+            }else{
+                // Save the image in the images folder
+                
+                // $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR; //****************************************
+                $path = 'images'.DIRECTORY_SEPARATOR;
 
-		$publication = $publication->get($publication_id);
+                $targetFileName = $user_id.'-'.uniqid().'.'.$fileType;
 
-		if($publication->profile_id == $_SESSION['profile_id']){
+                move_uploaded_file($_FILES["postPicture"]["tmp_name"], $path.$targetFileName);
 
-			$publication->deleteComments();
+                $uploadedFile["upload_message"] = "success";
 
-			unlink("images/$publication->picture");
+                $uploadedFile["target_file"] = $targetFileName;
 
-			$publication->delete();
+                return $uploadedFile;
 
-		}
+            }
 
-		header('location:/Profile/index/');
- 		
- 	}
+        }else{
+            // $this->view('Profile/edit');
+            $uploadedFile["upload_message"] = "Image not specified or not uploaded successfully.";
+
+            $uploadedFile["target_file"] = null;
+
+        }
+        return $uploadedFile;
+
+    }
+
 
 }

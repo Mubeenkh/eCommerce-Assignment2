@@ -1,10 +1,9 @@
 <?php $this->view('shared/header','Your Profile'); ?>
 
+	<?php $this->view('shared/search'); ?>
+
 	<div class="d-flex flex-row card">
 
-		<div class="p-2">
-			<img style="max-width:200px;" src="/images/<?=$data->picture?>">
-		</div>
 
 		<div class="p-2">
 
@@ -22,21 +21,19 @@
 		</div>
 		
 	</div>
+	<a href="/Profile/edit">Edit my profile</a>
+	<a href="/Main/index">Back</a>
 
+	<br><br>
 	<div class="profileContent">
 		
-		<form>
-			
-			
-		</form>
-
+		<?php $this->view('User/profile','Your Profile'); ?>
 
 
 	</div>
 
 
-	<a href="/Profile/edit">Edit my profile</a>
-	<a href="/User/profile">Back</a>
+	
 
 
 <?php $this->view('shared/footer'); ?>

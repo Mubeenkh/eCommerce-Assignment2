@@ -3,11 +3,8 @@ namespace app\controllers;
 
 class User extends \app\core\Controller{
 
-
-	// - As a person, I can log into the application.
-	public function index()
-	{  //login page
-
+	public function index()	//User Login Page
+	{
 		if(isset($_POST['action']))
 		{
 			
@@ -36,12 +33,10 @@ class User extends \app\core\Controller{
 			//display te form
 			$this->view('User/index'); 
 		}
-
 	}
 
-	// - As a person, I can register.
-	public function register()
-	{  //registration page
+	public function register() // User Registration Page
+	{
 
 		if(isset($_POST['action']))
 		{
@@ -70,32 +65,41 @@ class User extends \app\core\Controller{
 			$this->view('User/register'); 
 
 		}
+
 	}
 
-	// - As a user, I can logout of the application.
 	public function logout()
 	{
 
 		session_destroy();
-		header('location:/User/index');
+		// header('location:/User/index');
+		header('location:/Main/index');
 
 	}
 
+	#[\app\filters\Login]
 	public function profile()
 	{
+		//users "Secure place", 
+		//If user is mot loged in, it will not run the rest of the code****
+		// if(!isset($_SESSION['user_id'])){
+		// 	header('location:/User/index');
+		// 	return;	//to make sure they dont get access to what comes after this if
+		// }
+		$publication = new \app\models\publication();
+		// $publications = $publication->getByUser($_SESSION['user_id']);
+		$publications = $publication->getByUser();
+		$this->view('User/profile',$publications);
 
-		//users "Secure place"
+		// $this-> view('User/profile');
 
-		if(!isset($_SESSION['user_id'])){
-
-			header('location:/User/index');
-			return;
-
-		}
-		//When user clicks on see profile, it sends them to their profile
-		header('location:/Profile/index');
-		
 	}
 
+	public function userInfo()
+	{
+		$user = new \app\models\User();
+		$user = $user->getByUsername($_POST['username']);
+		$this->view('User/userInfo',$user);
+	}
 	
 }

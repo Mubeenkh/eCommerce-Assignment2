@@ -19,25 +19,42 @@
 	<div class="d-flex">
 
 
-<!-- ///////////////////////////////////////////////////////// -->
-		<!-- <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;"> -->
+
 		
+		<!-- Side Bar -->
 		<ul>
-		    <a href="/Main/index" ><h2>CliqueBait</h2></a>     
-			<li><a href="/User/index">Login</a></li>
-			<li><a href="/User/register">Register</a></li>
-			<li><a href="/User/profile">User Profile</a></li>
+		    <a href="/Main/index" ><h2>CliqueBait</h2></a>  
+
+		    <?php
+				if(isset($_SESSION['user_id'])){
+					//try to display username
+					
+				}else{
+					echo '<li><a href="/User/index">Login</a></li>';
+					echo '<li><a href="/User/register">Register</a></li>';
+				}
+			?>
+			
+			
+			<li><a href="/Profile/index">User Profile</a></li>
+			<li><a href='/Publication/create'>New publication</i></a></li>
+			<li><a href='/User/logout'>Sign Out</i></a></li>
+
 
 		</ul>
-		<!-- </div> -->
+	
 <!-- //////////////////////////////	 -->
-		<?php 
-			if(isset($_GET['error'])){
-				echo '<div class="alert alert-danger">' . $_GET['error'] . '</div>';
-			}
-			if(isset($_GET['success'])){
-				echo '<div class="alert alert-success">' . $_GET['success'] . '</div>';
-			}
-
-		?>
+		
+		<!-- Content -->
 		<div class="container">
+			<!-- Error Message -->
+			
+				<?php 
+					if(isset($_GET['error'])){
+						echo '<div class="alert alert-danger">' . $_GET['error'] . '</div>';
+					}
+					if(isset($_GET['success'])){
+						echo '<div class="alert alert-success">' . $_GET['success'] . '</div>';
+					}
+				?>
+			

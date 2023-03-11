@@ -1,56 +1,51 @@
 <?php $this->view('shared/header','Create Your Profile'); ?>
 
-
 	
-	<div class="d-flex  p-3">
+	<?php $this->view('shared/search'); ?>
 		
-		
-		<form action="" method="get" style="display:inline-block">					
-			
-			<div class="input-group">
-				<input type="search" name="search" class="form-control" placeholder="Enter search term">
-				<input type="submit" class="btn btn-secondary" value="Search" ></input>
-			</div>
-			
-		</form>
-	</div>
-		
-
+	<?php $this->view('User/userInfo'); ?>
 	<!-- /////Should use php here to post  -->
-	<div class="" id="">
+	<!-- <div class="card p-5">
 		
-			
 		<p>Posted by <a href=""> Name </a>  date and time posted</p>
-			<div style="border: 1px black solid; height: 100px">
-				
-				<a href="">
-					displays image
-					<img  src="">
-				</a>
-				<p>Display the caption</p>
-			</div>
-
-			<p>date and time posted</p>
+		<div class="card" style="border: 1px black solid; height: 100px">
 			
-		
+			<a href="">
+				displays image
+				<img  src="">
+			</a>
+			<p>Display the caption</p>
+		</div>
 
+		<p>date and time posted</p> -->
+			
+		<?php foreach ($data as $publication) 
+		{ 
+		?>
+			<hr>
+			<div class="card" style="border: 1px black solid; height: 100px">
+				<?php $profile=$publication->getProfile(); ?>
 
-		<!-- <?php
-			// foreach ($data as $publication){
-			 	// echo "<p>Posted by <a href=""> Name </a>  date and time posted</p>
-			// 		<div style="border: 1px black solid; height: 100px">
+				<a href="/Publication/details/<?=$publication->publication_id?>"><img src="/images/<?= $publication->picture ?>"></a>
+
+				<p>Posted by <a href='/Profile/details/<?=$profile->profile_id ?>'><?= htmlspecialchars($profile) ?></a> on <?= $publication->date_time?><?php
+					
+					if(isset($_SESSION['profile_id']) && $_SESSION['profile_id'] == $publication->profile_id)
+					{
+						echo "<a href='/Publication/delete/$publication->publication_id'><i class='bi-trash'></i></a>";
 						
-			// 			<a href="">
-			// 				displays image
-			// 				<img  src="">
-			// 			</a>
-			// 			<p>Display the caption</p>
-			// 		</div>
+						echo "<a href='/Publication/edit/$publication->publication_id'><i class='bi-pen'></i></a>";
+					}
 
-			// 		<p>date and time posted</p>";
-			// }
-		?> -->
-	</div>
+				?>
+				</p>
+				<p><?=htmlspecialchars($publication->caption) ?></p>
+			</div>
+		<?php
+		}	
+		?>
+
+	<!-- </div> -->
 	<!-- ////// -->
 	
 <?php $this->view('shared/footer'); ?>

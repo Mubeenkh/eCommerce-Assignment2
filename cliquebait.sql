@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `assignmenttwo`
+-- Database: `cliquebait`
 --
-CREATE DATABASE IF NOT EXISTS `assignmenttwo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `assignmenttwo`;
+CREATE DATABASE IF NOT EXISTS `cliquebait` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `cliquebait`;
 
 -- --------------------------------------------------------
 
