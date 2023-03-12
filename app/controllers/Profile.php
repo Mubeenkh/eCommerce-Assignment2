@@ -12,13 +12,25 @@ class Profile extends \app\core\Controller{
 		$profile = $profile->getByUserId($_SESSION['user_id']);
 		
 		if($profile){
-			$this->view('Profile/index',$profile);	
+			// $this->view('Profile/index',$profile);
+			$this->view('Profile/details', $profile);	
 		}else{
 			header('location:/Profile/create');	//if no profile then forced to go there
 		}
 
-
+		
+		
 	} 
+
+	public function details($user_id){
+		$profile = new \app\models\Profile();
+		$profile = $profile->getByUserId($user_id);
+		$this->view('Profile/details', $profile);
+	}
+
+
+////////////////////////////////////////////////////////
+
 	
 	#[\app\filters\Login]
 	public function create(){
@@ -47,7 +59,7 @@ class Profile extends \app\core\Controller{
 
 	}
 
-
+	#[\app\filters\Login]
 	public function edit(){
 
 		$profile = new \app\models\Profile();

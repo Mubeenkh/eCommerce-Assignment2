@@ -1,4 +1,4 @@
-<?php $this->view('shared/header','Login into you Account'); ?>
+<?php $this->view('shared/header','Register'); ?>
 <!-- <section class="h-100 gradient-form" style="background-color: #eee;"> -->
 
 	<div class="container py-5 h-100">
@@ -12,7 +12,7 @@
 								<form method="post" action="">
 									
 									<div class="text-center">
-										<h1>Registration Page</h1>
+										<h1>Make an Account</h1>
 									</div>
 
 									<div class="form-outline mb-4">

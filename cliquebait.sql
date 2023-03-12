@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2023 at 06:23 PM
+-- Generation Time: Mar 12, 2023 at 03:06 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -47,16 +47,16 @@ CREATE TABLE `profile` (
   `user_id` int(11) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `middle_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `picture` varchar(128) NOT NULL
+  `last_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `profile`
 --
 
-INSERT INTO `profile` (`user_id`, `first_name`, `middle_name`, `last_name`, `picture`) VALUES
-(1, 'Mubeen', '', 'Khan', '');
+INSERT INTO `profile` (`user_id`, `first_name`, `middle_name`, `last_name`) VALUES
+(1, 'Mubeen', 'Duckling', 'Khan'),
+(2, 'Rachelle', 'Secret', 'Badua');
 
 -- --------------------------------------------------------
 
@@ -72,6 +72,15 @@ CREATE TABLE `publication` (
   `caption` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `publication`
+--
+
+INSERT INTO `publication` (`publication_id`, `profile_id`, `picture`, `caption`, `timestamp`) VALUES
+(1, 1, '1-640d006b1ec98.png', 'testing', '2023-03-11 22:27:55'),
+(2, 1, '1-640d0b3e00760.png', 'testing2', '2023-03-11 23:14:06'),
+(3, 2, '2-640d0c3ec45e1.png', 'Dino', '2023-03-11 23:18:23');
 
 -- --------------------------------------------------------
 
@@ -91,7 +100,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password_hash`) VALUES
-(1, 'Mubeen', '$2y$10$CyPOiMzu1Uo2vn4qYMK1VuvQ2o.xGVap1a4SDCgIAv36vdybJuo2u');
+(1, 'Mubeen', '$2y$10$CyPOiMzu1Uo2vn4qYMK1VuvQ2o.xGVap1a4SDCgIAv36vdybJuo2u'),
+(2, 'Rachelle', '$2y$10$XhtLKVxVs5UiAG3ZyE/Fzu/T/jz2qYkitIEflHNFGwp.vFYBqjHv.');
 
 --
 -- Indexes for dumped tables
@@ -132,13 +142,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

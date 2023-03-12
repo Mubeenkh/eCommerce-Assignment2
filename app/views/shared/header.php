@@ -9,7 +9,24 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 	<title><?= $data ?></title>
-	
+	<style>
+		
+		a:link { 
+			text-decoration: none; 
+		}
+
+
+		a:visited { 
+			text-decoration: none; 
+		}
+
+
+		a:hover { text-decoration: none; }
+
+
+		a:active { text-decoration: none; }
+
+	</style>
 
 
 </head>
@@ -22,27 +39,29 @@
 
 		
 		<!-- Side Bar -->
-		<ul>
-		    <a href="/Main/index" ><h2>CliqueBait</h2></a>  
+		<div class="card p-3" style="width: 18rem;">
+			<ul class="list-group list-group-flush">
+				<!-- <div class="text-center"> -->
+				    <a href="/Main/index"  ><h2>CliqueBait</h2></a>  
+				<!-- </div> -->
+			    <?php
+					if(isset($_SESSION['user_id'])){
+						//try to display username
+						
+					}else{
+						echo '<li class="list-group-item"><a href="/User/index">Login</a></li>';
+						echo '<li class="list-group-item"><a href="/User/register">Register</a></li>';
+					}
+				?>
+				
+				
+				<li class="list-group-item"><a href="/Profile/index">My Profile</a></li>
+				<li class="list-group-item"><a href='/Publication/create'>New Post</i></a></li>
+				<li class="list-group-item"><a href='/User/logout'>Sign Out</i></a></li>
 
-		    <?php
-				if(isset($_SESSION['user_id'])){
-					//try to display username
-					
-				}else{
-					echo '<li><a href="/User/index">Login</a></li>';
-					echo '<li><a href="/User/register">Register</a></li>';
-				}
-			?>
-			
-			
-			<li><a href="/Profile/index">User Profile</a></li>
-			<li><a href='/Publication/create'>New publication</i></a></li>
-			<li><a href='/User/logout'>Sign Out</i></a></li>
 
-
-		</ul>
-	
+			</ul>
+		</div>
 <!-- //////////////////////////////	 -->
 		
 		<!-- Content -->

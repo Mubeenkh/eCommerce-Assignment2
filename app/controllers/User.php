@@ -87,19 +87,14 @@ class User extends \app\core\Controller{
 		// 	return;	//to make sure they dont get access to what comes after this if
 		// }
 		$publication = new \app\models\publication();
-		// $publications = $publication->getByUser($_SESSION['user_id']);
-		$publications = $publication->getByUser();
+		$publications = $publication->getByUser($_SESSION['user_id']);
+		// $publications = $publication->getByUser();
 		$this->view('User/profile',$publications);
 
 		// $this-> view('User/profile');
 
 	}
 
-	public function userInfo()
-	{
-		$user = new \app\models\User();
-		$user = $user->getByUsername($_POST['username']);
-		$this->view('User/userInfo',$user);
-	}
+
 	
 }

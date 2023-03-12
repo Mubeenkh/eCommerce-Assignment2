@@ -7,20 +7,9 @@ class Profile extends \app\core\Model{
 	public $last_name;
 	public $middle_name;
 
-	public function getByUserId($user_id){
-		//: is a place holder
-		$SQL = "SELECT * FROM profile WHERE user_id=:user_id";
 
-		$STH = $this->connection->prepare($SQL);
-
-		$STH->execute( ['user_id' => $user_id] );
-
-		$STH->setFetchMode(\PDO::FETCH_CLASS,'app\\Models\\Profile');
-
-		return $STH->fetch();
-	}
-
-	public function insert(){
+	public function insert()
+	{
 		$SQL = "INSERT INTO profile(user_id,first_name,last_name,middle_name) VALUES (:user_id,:first_name,:last_name,:middle_name)";
 
 		$STH = $this->connection->prepare($SQL);
@@ -36,7 +25,8 @@ class Profile extends \app\core\Model{
 		return $STH->rowCount();
 	}
 
-	public function update(){
+	public function update()
+	{
 		//modify object without changing the user_id
 
 		$SQL = "UPDATE `profile` 
@@ -56,6 +46,56 @@ class Profile extends \app\core\Model{
 		return $STH->rowCount();
 	}
 
+	public function getByUserId($user_id){
+		//: is a place holder
+		$SQL = "SELECT * FROM profile WHERE user_id=:user_id";
+
+		$STH = $this->connection->prepare($SQL);
+
+		$STH->execute( ['user_id' => $user_id] );
+
+		$STH->setFetchMode(\PDO::FETCH_CLASS,'app\\models\\Profile');
+
+		return $STH->fetch();
+	}
+
+/////////////////////
+
+	// public function get($user_id){
+
+	// 	$SQL = "SELECT * FROM profile WHERE user_id=:user_id";
+
+	// 	$STH = $this->connection->prepare($SQL);
+
+	// 	$STH->execute(['user_id'=>$user_id]);
+
+	// 	$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
+
+	// 	return $STH->fetch();
+
+	// }
+
+	public function getPublications($user_id){
+		$SQL = "SELECT * FROM publication WHERE profile_id=:profile_id ORDER BY `timestamp` DESC";
+
+		$STH = $this->connection->prepare($SQL);
+
+		// $profile_ID = $_SESSION['user_id'];
+		$STH->execute(['profile_id'=>$this->user_id]);
+
+		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Publication');
+
+		return $STH->fetchAll();
+	}
+
+	public function getAll(){
+		$SQL = "SELECT * FROM profile";
+		$STH = $this->connection->prepare($SQL);
+		$STH->execute();
+		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
+		return $STH->fetchAll();
+	}
+	
 
 
 }

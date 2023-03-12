@@ -14,6 +14,7 @@ class Publication extends \app\core\Model{
 	{
 		$SQL = "SELECT * FROM publication";
 		$STH = $this->connection->prepare($SQL);
+		$STH->execute();
 		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Publication');
 		return $STH->fetchAll();
 	}
@@ -39,11 +40,11 @@ class Publication extends \app\core\Model{
 	// $profile_id
 	public function getByUser()
     {
-        $SQL = "SELECT * FROM profile WHERE profile_id=:profile_id";
+        $SQL = "SELECT * FROM profile WHERE user_id=:user_id";
 
         $STH = $this->connection->prepare($SQL);
 
-        $data = ['profile_id' => $profile_id];
+        $data = ['user_id' => $user_id];
 
         $STH->execute($data);
 
@@ -52,4 +53,51 @@ class Publication extends \app\core\Model{
 		return $STH->fetch();
     }	
 
+
+    public function update(){
+		//modify object without changing the user_id
+
+		$SQL = "UPDATE `publication` 
+				SET `caption`=:caption
+				WHERE publication_id=:publication_id";
+
+		$STH = $this->connection->prepare($SQL);
+
+		$data = [
+			'caption'=>$this->caption,
+			'publication_id'=>$this->publication_id
+		];
+
+		$STH->execute( $data );
+		return $STH->rowCount();
+	}
+
+
+
+/////////////////////////////////////////////////
+
+	public function getPost($publication_id){
+		$SQL = "SELECT * FROM publication WHERE publication_id=:publication_id";
+		$STH = $this->connection->prepare($SQL);
+		$STH->execute(['publication_id'=>$publication_id]);
+		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Publication');
+		return $STH->fetch();
+	}
+
+
+	public function getProfile(){
+		$SQL = "SELECT * FROM profile WHERE user_id=:user_id";
+		$STH = $this->connection->prepare($SQL);
+		
+		$STH->execute(['user_id'=>$this->user_id]);
+		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
+		return $STH->fetch();
+	}
+
+	
+	public function deletePost(){
+		$SQL = "DELETE FROM publication WHERE publication_id=:publication_id";
+		$STH = $this->connection->prepare($SQL);
+		$STH->execute(['publication_id'=>$this->publication_id]);
+	}
 }

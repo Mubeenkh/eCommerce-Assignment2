@@ -107,5 +107,52 @@ class Publication extends \app\core\Controller{
 
     }
 
+/////////////////////////////////////
+
+    public function details($publication_id){//detailed view for a record
+        $publication = new \app\models\Publication();
+        $publication = $publication->get($publication_id);
+        $this->view('Publication/details', $publication);
+    }
+    
+    #[\app\filters\Login]
+    public function delete($publication_id){
+
+        $publication = new \app\models\Publication();
+        $publication = $publication->get($publication_id);
+
+        if($publication->profile_id == $_SESSION['user_id']){
+            unlink("images/$publication->picture");
+            $publication->deletePost();
+        }
+        header('location:/Profile/index/');
+    }
+
+    public function edit($publication_id)
+    {
+        $publication = new \app\models\publication();
+        $publication = $publication->getPost($publication_id);
+
+        if(isset($_POST['edit'])){
+
+            //we just change the caption
+            $publication->caption = $_POST['caption']; 
+
+            $success = $publication->update();                  //updates data in the table
+
+            if($success){
+                header('location:/Profile/index?success=Post was successfully modified.');
+            }else{
+                header('location:/Profile/index?error=Something went wrong when editting your post.');
+            }
+
+        }else{
+
+            $this->view('Publication/edit', $publication);  //adding $profile so we can view the information
+        }
+
+
+        
+    }
 
 }

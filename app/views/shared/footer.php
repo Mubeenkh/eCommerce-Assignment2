@@ -1,7 +1,7 @@
 	
 		</div>
 
-		<div style="width: 500px;">
+		<div style="width: 200px;">
 			
 		</div>
 		

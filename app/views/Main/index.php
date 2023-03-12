@@ -1,51 +1,48 @@
-<?php $this->view('shared/header','Create Your Profile'); ?>
+<?php $this->view('shared/header','CliqueBait'); ?>
 
 	
 	<?php $this->view('shared/search'); ?>
 		
-	<?php $this->view('User/userInfo'); ?>
 	<!-- /////Should use php here to post  -->
-	<!-- <div class="card p-5">
-		
-		<p>Posted by <a href=""> Name </a>  date and time posted</p>
-		<div class="card" style="border: 1px black solid; height: 100px">
+<!-- 	<?php 
+		//foreach to get all the publications
+		foreach ($data as $publication) 
+		{ 
+
+			$profile = new \app\models\Profile();
+			$profile = $profile->getByUserId($publication->profile_id);
+	?>
+
+		<div class="card p-5 m-3" style=" max-height: 350px;">
 			
-			<a href="">
-				displays image
-				<img  src="">
-			</a>
-			<p>Display the caption</p>
+			<div class="row">
+
+				<label>Posted by <a href='Profile\index\' ><?= $profile->first_name ?></a></label><hr>
+
+				<div class="col-sm-4">
+					<img class="col-sm-10" src="/images/<?= $publication->picture ?>" style=" max-width:250px; max-height:250px;">
+				</div>
+				<div class="card col-sm-8">
+					<h2>Caption</h2>
+					<p><?=htmlspecialchars($publication->caption) ?></p>
+					<label><?=$publication->timestamp?></label>
+				</div>
+			</div>
+
 		</div>
 
-		<p>date and time posted</p> -->
-			
-		<?php foreach ($data as $publication) 
-		{ 
-		?>
-			<hr>
-			<div class="card" style="border: 1px black solid; height: 100px">
-				<?php $profile=$publication->getProfile(); ?>
-
-				<a href="/Publication/details/<?=$publication->publication_id?>"><img src="/images/<?= $publication->picture ?>"></a>
-
-				<p>Posted by <a href='/Profile/details/<?=$profile->profile_id ?>'><?= htmlspecialchars($profile) ?></a> on <?= $publication->date_time?><?php
-					
-					if(isset($_SESSION['profile_id']) && $_SESSION['profile_id'] == $publication->profile_id)
-					{
-						echo "<a href='/Publication/delete/$publication->publication_id'><i class='bi-trash'></i></a>";
-						
-						echo "<a href='/Publication/edit/$publication->publication_id'><i class='bi-pen'></i></a>";
-					}
-
-				?>
-				</p>
-				<p><?=htmlspecialchars($publication->caption) ?></p>
-			</div>
-		<?php
+	<?php
 		}	
-		?>
+	?> -->
 
-	<!-- </div> -->
+
+	<?php
+		foreach ($data as $publication) {
+			$this->view('Publication/partial', $publication);
+		}
+	?>
+
+	
 	<!-- ////// -->
 	
 <?php $this->view('shared/footer'); ?>
