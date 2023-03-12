@@ -1,5 +1,6 @@
-<div class="card p-2 m-3" >
+<div class="card p-2 m-3 shadow-lg p-3 mb-5 bg-white rounded" >
 	<!-- card p-2 m-2 d-flex justify-content-center" style=" max-width:500px; " -->
+	
 	<?php 
 		// $data is $publication
 		$profile = new \app\models\Profile();
@@ -8,7 +9,7 @@
 	?>
 
 	
-	<div class="card-body row">
+	<div class="card-body row ">
 
 		<div class="row">
 
@@ -27,7 +28,7 @@
 							<p class=" col-sm">Posted on <?= $data->timestamp?> </p>
 
 							<p >By 
-								<a href='/Profile/details/<?=$profile->user_id ?>'>
+								<a href='/Profile/userProfile/<?=$profile->user_id ?>'>
 									<b>
 										<?=$profile->first_name ?> 
 										<?=$profile->middle_name ?> 

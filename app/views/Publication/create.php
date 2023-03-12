@@ -36,7 +36,7 @@
 
 		<div class="">
 			<br>
-			<input  class="btn btn-success" type="submit" name="action" value="Create Post">
+			<input  class="btn btn-success" type="submit" name="create" value="Create Post">
 		</div>
 
 	</form>

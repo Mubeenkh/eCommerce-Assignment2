@@ -11,7 +11,7 @@ class Profile extends \app\core\Model{
 
 	public function insert()
 	{
-		$SQL = "INSERT INTO profile(user_id,first_name,last_name,middle_name) VALUES (:user_id,:first_name,:last_name,:middle_name)";
+		$SQL = "INSERT INTO profile(user_id,first_name,last_name,middle_name,picture) VALUES (:user_id,:first_name,:last_name,:middle_name,:picture)";
 
 		$STH = $this->connection->prepare($SQL);
 
@@ -79,7 +79,9 @@ class Profile extends \app\core\Model{
 	// }
 
 	public function getPublications($user_id){
-		$SQL = "SELECT * FROM publication WHERE profile_id=:profile_id ORDER BY `timestamp` DESC";
+		$SQL = "SELECT * FROM publication 
+				WHERE profile_id=:profile_id 
+				ORDER BY `timestamp` DESC";
 
 		$STH = $this->connection->prepare($SQL);
 

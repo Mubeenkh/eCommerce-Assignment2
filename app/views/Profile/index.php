@@ -1,28 +1,46 @@
 <?php $this->view('shared/header','Profile Page'); ?>
-<!-- KIND OF USELESS CUUZ NOT BEING USED ************************************************-->
-	<?php $this->view('shared/search'); ?>
 
-	<div class="d-flex flex-row card">
+	<!-- <?php $this->view('shared/search'); ?> -->
+	<div class="p-5 text-center">
+		<h1 style="font-family: 'Courier New', monospace;"> <?=$data->first_name?>'s Profile Page</h1>
+	</div>
+	<div class=" p-2 shadow p-3 mb-5 bg-white rounded" >
 
-		<div class="p-2">
+		<div class=" row d-flex justify-content-center align-items-center ">
 
-			<div class="p-2">
-				<img style="max-width:200px;" src="/images/<?=$data->picture?>">
+			<div class="col-md-4 px-5 ">
+				<img class="col-sm-10 card rounded-circle " style="max-width:300px; max-height:300px;" src="/images/<?=$data->picture?>">
 			</div>
-			
-			<dl>
-				<h2><dt>First Name</dt></h2>
-				<dd><?=$data->first_name?></dd>
+			<div class="col-md-8 ">
+				<dl class=" ml-auto shadow-none p-3 mb-5 bg-light rounded" style="max-width:500px;">
+					
+						<dt><h4>First Name</h4></dt>
+						<dd><?=$data->first_name?></dd>
 
-				<dt>Middle Name</dt>
-				<dd><?=$data->middle_name?></dd>
+						<dt><h4>Middle Name</h4></dt>
+						<dd><?=$data->middle_name?></dd>
 
-				<dt>Last Name</dt>
-				<dd><?=$data->last_name?></dd>
+						<dt><h4>Last Name</h4></dt>
+						<dd><?=$data->last_name?></dd>
+					
+				</dl>
+				
+				<?php
+					if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $data->user_id){
+						
+					}else{
+						//if i am not following this person then
+				?>
+						<a href="/Follow/followUser/<?= $data->user_id?>">follow</a>
+				<?php
+						//else unfollow link
+					}
+				?>
+				
 
-			</dl>
-
+			</div>
 		</div>
+
 		
 	</div>
 	<!-- <a href="/Profile/edit">Edit my profile</a>
@@ -31,23 +49,24 @@
 	<?php
 		if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $data->user_id){
 			echo '<a href="/Profile/edit">Edit my profile</a> <br>';
-			echo '<a href="/Main/index">Back</a>';
 		}
 	?>
-
+	<a href="/Main/index">Back</a>
 	<br><br>
-		
+
 	
-	<h2>Publications by <?=$data ?></h2>
-	<?php
-		// $publications = $data->getPublications();
-		// foreach ($publications as $publication) {
-		// 	$this->view('Publication/partial', $publication);
-		// }
-	?>
+	<h2>Publications by <?=$data->first_name ?></h2>
 
-
+	<!-- <div class="card "> -->
+		<h2 style="text-align: center;">Posts</h2> 
+		
+			<?php
+				$publications = $data->getPublications($data->user_id);
+				// echo "$data->user_id";
+				foreach ($publications as $publication) {
+					$this->view('Publication/posts', $publication);
+				}
+			?>
+		
+	<!-- </div> -->
 <?php $this->view('shared/footer'); ?>
-
-
-<!-- KIND OF USELESS CUUZ NOT BEING USED ************************************************-->

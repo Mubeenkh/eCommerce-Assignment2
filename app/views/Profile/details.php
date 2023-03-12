@@ -1,8 +1,19 @@
-<?php $this->view('shared/header','Profile Page'); ?>
+<!-- <?php $this->view('shared/header','Profile Page'); ?> -->
 
-	<?php $this->view('shared/search'); ?>
 
-	<div class="card p-2 ">
+
+<!-- NOT NEEDED CUZ IM USING INDEX -->
+
+<!--********************************************************************************* -->
+
+
+
+
+
+
+	<!-- <?php $this->view('shared/search'); ?> -->
+
+<!-- 	<div class="card p-2 ">
 
 		<div class="row">
 
@@ -24,31 +35,31 @@
 
 		</div>
 		
-	</div>
+	</div> -->
 	<!-- <a href="/Profile/edit">Edit my profile</a>
 	<a href="/Main/index">Back</a> -->
 
-	<?php
+	<!-- <?php
 		if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $data->user_id){
 			echo '<a href="/Profile/edit">Edit my profile</a> <br>';
 		}
-	?>
-	<a href="/Main/index">Back</a>
-	<br><br>
+	?> -->
+	<!-- <a href="/Main/index">Back</a> -->
+	<!-- <br><br> -->
 
 	
-	<h2>Publications by <?=$data->first_name ?></h2>
+	<!-- <h2>Publications by <?=$data->first_name ?></h2> -->
 
 	<!-- <div class="card "> -->
-		<h2 style="text-align: center;">Posts</h2> 
+		<!-- <h2 style="text-align: center;">Posts</h2>  -->
 		
-			<?php
+			<!-- <?php
 				$publications = $data->getPublications($data->user_id);
 				// echo "$data->user_id";
 				foreach ($publications as $publication) {
-					$this->view('Publication/partial', $publication);
+					$this->view('Publication/posts', $publication);
 				}
-			?>
+			?> -->
 		
 	<!-- </div> -->
-<?php $this->view('shared/footer'); ?>
+<!-- <?php $this->view('shared/footer'); ?> -->

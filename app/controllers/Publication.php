@@ -6,12 +6,15 @@ class Publication extends \app\core\Controller{
 	#[\app\filters\Login]
 	public function create(){
 
-		if(isset($_POST['action']))
+		if(isset($_POST['create']))
 		{
 
 			$publication = new \app\models\Publication();
 
 			$publication->profile_id = $_SESSION['user_id'];//FK ///************might be user_id
+
+
+            
 			$publication->caption = $_POST['caption'];
 			// $filename = $this->saveFile($_FILES['picture']);
 
@@ -107,19 +110,22 @@ class Publication extends \app\core\Controller{
 
     }
 
-/////////////////////////////////////
+    /////////////////////////////////////
 
     public function details($publication_id){//detailed view for a record
+
         $publication = new \app\models\Publication();
-        $publication = $publication->get($publication_id);
-        $this->view('Publication/details', $publication);
+        $publication = $publication->getPost($publication_id);
+        $this->view('Publication/index', $publication);
+
     }
-    
+
+    ///////////////////////////////////// Used in Publication\partial /////////////////////////////////////
     #[\app\filters\Login]
     public function delete($publication_id){
 
         $publication = new \app\models\Publication();
-        $publication = $publication->get($publication_id);
+        $publication = $publication->getPost($publication_id);
 
         if($publication->profile_id == $_SESSION['user_id']){
             unlink("images/$publication->picture");
@@ -151,8 +157,16 @@ class Publication extends \app\core\Controller{
             $this->view('Publication/edit', $publication);  //adding $profile so we can view the information
         }
 
+    }
 
-        
+
+    ///////////////////////////////////// Search Publications Using Caption /////////////////////////////////////
+    
+    public function searchPost()
+    {
+        $publication = new \app\models\Publication();
+        $publications = $publication->searchPost($_GET['searchByCaption']);
+        $this->view('Main/index',$publications);
     }
 
 }

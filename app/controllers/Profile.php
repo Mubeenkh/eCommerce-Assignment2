@@ -13,19 +13,21 @@ class Profile extends \app\core\Controller{
 		
 		if($profile){
 			// $this->view('Profile/index',$profile);
-			$this->view('Profile/details', $profile);	
+			$this->view('Profile/index', $profile);	
 		}else{
 			header('location:/Profile/create');	//if no profile then forced to go there
 		}
-
-		
-		
+	
 	} 
 
-	public function details($user_id){
+	public function userProfile($user_id){
+
 		$profile = new \app\models\Profile();
+		
 		$profile = $profile->getByUserId($user_id);
-		$this->view('Profile/details', $profile);
+
+		$this->view('Profile/index', $profile);
+
 	}
 
 
@@ -33,7 +35,7 @@ class Profile extends \app\core\Controller{
 	#[\app\filters\Login]
 	public function create(){
 
-		if(isset($_POST['action'])){
+		if(isset($_POST['create'])){
 
 			$profile = new \app\models\Profile();
 			$profile->user_id = $_SESSION['user_id'];
@@ -42,16 +44,19 @@ class Profile extends \app\core\Controller{
 			$profile->middle_name = $_POST['middle_name']; 
 		
 			////////////////////////
-            $uploadedPicture = $this->addPicture($_SESSION['user_id']);
+            $uploadedPicture = $this->uploadPicture($_SESSION['user_id']);
 
             if(isset($uploadedPicture['target_file']))
+            {
                 $profile->picture = $uploadedPicture["target_file"];
+                
+            }
 
             $uploadMessage = $uploadedPicture["upload_message"] == 'success' ? '' : '&error=Something went wrong '.$uploadedPicture["upload_message"];
-
+            
 			////////////////////////
 			$success = $profile->insert();						//inserts data into the profile table
-
+			
 			if($success){
 				header('location:/Profile/index?success=Profile created.' .$uploadMessage);
 			}else{
@@ -71,7 +76,7 @@ class Profile extends \app\core\Controller{
 		$profile = new \app\models\Profile();
 		$profile = $profile->getByUserId($_SESSION['user_id']);
 
-		if(isset($_POST['action'])){
+		if(isset($_POST['edit'])){
 			
 			// $profile->user_id = $_SESSION['user_id'];	//when you edit profile you dont change the user_id
 			$profile->first_name = $_POST['first_name']; 
@@ -80,8 +85,8 @@ class Profile extends \app\core\Controller{
 
 			///////////////////////////////////
 
-            $uploadedPicture = $this->addPicture($_SESSION['user_id']);
-
+            $uploadedPicture = $this->uploadPicture($_SESSION['user_id']);
+            
             if(isset($uploadedPicture['target_file']))
             {
                 $profile->picture = $uploadedPicture["target_file"];
@@ -109,8 +114,8 @@ class Profile extends \app\core\Controller{
 
 
 
-	public function addPicture($user_id){
-
+	public function uploadPicture($user_id){
+		echo 'inside profile addpic';
 		$uploadedFile = array();
 
         if(isset($_FILES["profilePicture"]) && ($_FILES["profilePicture"]["error"] == UPLOAD_ERR_OK))
@@ -141,7 +146,7 @@ class Profile extends \app\core\Controller{
 
             }else{
                 // Save the image in the images folder
-                
+                	
                 // $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR; //****************************************
                 $path = 'images'.DIRECTORY_SEPARATOR;
 
@@ -152,13 +157,13 @@ class Profile extends \app\core\Controller{
                 $uploadedFile["upload_message"] = "success";
 
                 $uploadedFile["target_file"] = $targetFileName;
+                
 
+				// echo ",,,,,saved and returned uploadedFile";
                 return $uploadedFile;
-
-
             }
 
-
+            
         }else{
             // $this->view('Profile/edit');
             $uploadedFile["upload_message"] = "Image not specified or not uploaded successfully.";
@@ -166,8 +171,18 @@ class Profile extends \app\core\Controller{
             $uploadedFile["target_file"] = null;
 
         }
+        
         return $uploadedFile;
 
     }
+
+
+    //check if your following here since you can easily send the user_id of the profile here
+    public function isFollowing($user_id)
+    {
+    	
+    }
+
+
 
 }

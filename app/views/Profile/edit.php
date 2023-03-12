@@ -32,7 +32,7 @@
 		<input type="file" name="profilePicture" class="form-control"></br>
 
 
-		<input  type="submit" name="action" value="Save Changes" class="btn btn-secondary">
+		<input  type="submit" name="edit" value="Save Changes" class="btn btn-secondary">
 	</form>
 
 	<div>

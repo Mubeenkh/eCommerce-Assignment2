@@ -12,7 +12,8 @@ class Publication extends \app\core\Model{
 
 	public function getAll()
 	{
-		$SQL = "SELECT * FROM publication ORDER BY timestamp DESC";
+		$SQL = "SELECT * FROM publication 
+				ORDER BY timestamp DESC";
 		$STH = $this->connection->prepare($SQL);
 		$STH->execute();
 		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Publication');
@@ -22,7 +23,8 @@ class Publication extends \app\core\Model{
 
 	public function insert()
 	{
-		$SQL = "INSERT INTO publication(profile_id, picture, caption) VALUES (:profile_id, :picture, :caption)";
+		$SQL = "INSERT INTO publication(profile_id, picture, caption) 
+				VALUES (:profile_id, :picture, :caption)";
 
 		$STH = $this->connection->prepare($SQL);
 
@@ -40,7 +42,8 @@ class Publication extends \app\core\Model{
 	// $profile_id
 	public function getByUser()
     {
-        $SQL = "SELECT * FROM profile WHERE user_id=:user_id";
+        $SQL = "SELECT * FROM profile 
+        		WHERE user_id=:user_id";
 
         $STH = $this->connection->prepare($SQL);
 
@@ -54,7 +57,8 @@ class Publication extends \app\core\Model{
     }	
 
 
-    public function update(){
+    public function update()
+    {
 		//modify object without changing the user_id
 
 		$SQL = "UPDATE `publication` 
@@ -72,11 +76,30 @@ class Publication extends \app\core\Model{
 		return $STH->rowCount();
 	}
 
+	public function searchPost($caption)
+	{
+		$SQL = "SELECT * FROM publication 
+				WHERE caption LIKE :caption 
+				ORDER BY timestamp DESC";
+
+		$STH = $this->connection->prepare($SQL);
+
+		$data = [
+			'caption' => "%$caption%"
+		];
+
+		$STH->execute($data);
+		$STH->setFetchMode(\PDO::FETCH_CLASS,'app\\models\\Publication');
+
+		return $STH->fetchAll();
+	}
+
 
 
 /////////////////////////////////////////////////
 
-	public function getPost($publication_id){
+	public function getPost($publication_id)
+	{
 		$SQL = "SELECT * FROM publication WHERE publication_id=:publication_id";
 		$STH = $this->connection->prepare($SQL);
 		$STH->execute(['publication_id'=>$publication_id]);
@@ -85,7 +108,8 @@ class Publication extends \app\core\Model{
 	}
 
 
-	public function getProfile(){
+	public function getProfile()
+	{
 		$SQL = "SELECT * FROM profile WHERE user_id=:user_id";
 		$STH = $this->connection->prepare($SQL);
 		
@@ -95,7 +119,8 @@ class Publication extends \app\core\Model{
 	}
 
 	
-	public function deletePost(){
+	public function deletePost()
+	{
 		$SQL = "DELETE FROM publication WHERE publication_id=:publication_id";
 		$STH = $this->connection->prepare($SQL);
 		$STH->execute(['publication_id'=>$this->publication_id]);
