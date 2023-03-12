@@ -28,8 +28,8 @@
 		</div>
 
 		<!-- Posting a picture -->
-		<!-- <label class="form-label">Profile Picture: </label>
-		<input type="file" name="profilePicture" class="form-control"></br> -->
+		<label class="form-label">Profile Picture: </label>
+		<input type="file" name="profilePicture" class="form-control"></br>
 
 
 		<input  type="submit" name="action" value="Save Changes" class="btn btn-secondary">

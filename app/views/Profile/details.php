@@ -2,11 +2,15 @@
 
 	<?php $this->view('shared/search'); ?>
 
-	<div class="d-flex flex-row card">
+	<div class="card p-2 ">
 
-		<div class="p-2">
+		<div class="row">
 
-			<dl>
+			<div class="col-md-4">
+				<img class="card" style="max-width:250px;" src="/images/<?=$data->picture?>">
+			</div>
+
+			<dl class="col-md-8 ml-auto ">
 				<dt><h4>First Name</h4></dt>
 				<dd><?=$data->first_name?></dd>
 
@@ -32,6 +36,7 @@
 	<a href="/Main/index">Back</a>
 	<br><br>
 
+	
 	<h2>Publications by <?=$data->first_name ?></h2>
 
 	<!-- <div class="card "> -->

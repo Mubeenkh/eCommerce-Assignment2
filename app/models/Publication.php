@@ -12,7 +12,7 @@ class Publication extends \app\core\Model{
 
 	public function getAll()
 	{
-		$SQL = "SELECT * FROM publication";
+		$SQL = "SELECT * FROM publication ORDER BY timestamp DESC";
 		$STH = $this->connection->prepare($SQL);
 		$STH->execute();
 		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Publication');

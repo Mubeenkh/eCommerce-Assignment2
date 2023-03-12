@@ -6,6 +6,10 @@
 
 		<div class="p-2">
 
+			<div class="p-2">
+				<img style="max-width:200px;" src="/images/<?=$data->picture?>">
+			</div>
+			
 			<dl>
 				<h2><dt>First Name</dt></h2>
 				<dd><?=$data->first_name?></dd>

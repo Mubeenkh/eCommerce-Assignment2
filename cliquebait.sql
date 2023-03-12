@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2023 at 03:06 AM
+-- Generation Time: Mar 12, 2023 at 08:21 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -47,16 +47,17 @@ CREATE TABLE `profile` (
   `user_id` int(11) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `middle_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL
+  `last_name` varchar(50) NOT NULL,
+  `picture` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `profile`
 --
 
-INSERT INTO `profile` (`user_id`, `first_name`, `middle_name`, `last_name`) VALUES
-(1, 'Mubeen', 'Duckling', 'Khan'),
-(2, 'Rachelle', 'Secret', 'Badua');
+INSERT INTO `profile` (`user_id`, `first_name`, `middle_name`, `last_name`, `picture`) VALUES
+(1, 'Mubeen', 'Duckling', 'Khan', ''),
+(2, 'Rachelle', 'Secret', 'Badua', '');
 
 -- --------------------------------------------------------
 
@@ -78,9 +79,12 @@ CREATE TABLE `publication` (
 --
 
 INSERT INTO `publication` (`publication_id`, `profile_id`, `picture`, `caption`, `timestamp`) VALUES
-(1, 1, '1-640d006b1ec98.png', 'testing', '2023-03-11 22:27:55'),
 (2, 1, '1-640d0b3e00760.png', 'testing2', '2023-03-11 23:14:06'),
-(3, 2, '2-640d0c3ec45e1.png', 'Dino', '2023-03-11 23:18:23');
+(3, 2, '2-640d0c3ec45e1.png', 'Dino', '2023-03-11 23:18:23'),
+(4, 1, '1-640d36752e801.png', 'help', '2023-03-12 02:18:29'),
+(6, 2, '2-640d6157a76e6.png', 'Bread', '2023-03-12 05:34:22'),
+(7, 2, '2-640d658fc0894.png', 'Happy Kittyyyy', '2023-03-12 05:39:29'),
+(8, 1, '1-640d68abb7252.png', 'KITTYYYYYYY', '2023-03-12 05:52:43');
 
 -- --------------------------------------------------------
 
@@ -142,7 +146,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
