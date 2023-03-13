@@ -112,13 +112,13 @@ class Publication extends \app\core\Controller{
 
     /////////////////////////////////////
 
-    public function details($publication_id){//detailed view for a record
+    // public function details($publication_id){//detailed view for a record
 
-        $publication = new \app\models\Publication();
-        $publication = $publication->getPost($publication_id);
-        $this->view('Publication/index', $publication);
+    //     $publication = new \app\models\Publication();
+    //     $publication = $publication->getPost($publication_id);
+    //     $this->view('Publication/index', $publication);
 
-    }
+    // }
 
     ///////////////////////////////////// Used in Publication\partial /////////////////////////////////////
     #[\app\filters\Login]
