@@ -13,20 +13,20 @@ class Profile extends \app\core\Controller{
 		
 		if($profile){
 			// $this->view('Profile/index',$profile);
-			$this->view('Profile/index', $profile);	
-		}else{
+			$this->view('Profile/details', $profile);	//uses the details to display 
+		}else{																																															
 			header('location:/Profile/create');	//if no profile then forced to go there
 		}
 	
 	} 
-
-	public function userProfile($user_id){
+	//this function allows you to see the users profile by 
+	public function details($user_id){
 
 		$profile = new \app\models\Profile();
 		
 		$profile = $profile->getByUserId($user_id);
 
-		$this->view('Profile/index', $profile);
+		$this->view('Profile/details', $profile);
 
 	}
 
@@ -158,8 +158,6 @@ class Profile extends \app\core\Controller{
 
                 $uploadedFile["target_file"] = $targetFileName;
                 
-
-				// echo ",,,,,saved and returned uploadedFile";
                 return $uploadedFile;
             }
 
@@ -176,13 +174,15 @@ class Profile extends \app\core\Controller{
 
     }
 
+    //checking the followers have to be here since you are passing the data from the view /Profile/details
+    public function checkIfFollowing($profile_id){
+		$follow = new \app\models\Follow();
+		$follow->follower_id = $_SESSION['user_id'];
+		$follow->followed_id = $profile_id;
 
-    //check if your following here since you can easily send the user_id of the profile here
-    public function isFollowing($user_id)
-    {
-    	
-    }
+		$boolean = $follow->isFollowing();
 
-
+		return $boolean;	
+	}
 
 }

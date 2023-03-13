@@ -28,7 +28,7 @@
 							<p class=" col-sm">Posted on <?= $data->timestamp?> </p>
 
 							<p >By 
-								<a href='/Profile/userProfile/<?=$profile->user_id ?>'>
+								<a href='/Profile/details/<?=$profile->user_id ?>'>
 									<b>
 										<?=$profile->first_name ?> 
 										<?=$profile->middle_name ?> 
