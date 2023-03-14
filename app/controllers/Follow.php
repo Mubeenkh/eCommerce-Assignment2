@@ -3,6 +3,7 @@ namespace app\controllers;
 
 class Follow extends \app\core\Controller{
 
+
 	//following someone
 	public function followUser($following)
 	{

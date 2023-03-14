@@ -57,11 +57,5 @@ class Follow extends \app\core\Model{
 	}
 
 
-	public function getAllFollowers()
-	{
-		$SQL = 'SELECT follow.follower_id AS follower, follow.followed_id AS following, publication.profile_id AS profile_id
-				FROM follow JOIN publication WHERE follower = profile_id';
-	}
-
 	
 }

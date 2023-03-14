@@ -30,6 +30,30 @@ class Profile extends \app\core\Controller{
 
 	}
 
+    //checking the followers have to be here since you are passing the data from the view /Profile/details
+    public function checkIfFollowing($profile_id){
+		$follow = new \app\models\Follow();
+		$follow->follower_id = $_SESSION['user_id'];
+		$follow->followed_id = $profile_id;
+
+		$boolean = $follow->isFollowing();
+
+		return $boolean;	
+	}
+
+
+////////////////////////////////
+	// public function getMyFollowers($profile_id)
+	// {
+	// 	$follow = new \app\models\Follow();
+	// 	$follow->follower_id = $_SESSION['user_id'];
+	// 	$follow->followed_id = $profile_id;
+
+	// 	$this->view('Follow/index', $follow);
+
+	// }
+
+
 
 	
 	#[\app\filters\Login]
@@ -174,15 +198,6 @@ class Profile extends \app\core\Controller{
 
     }
 
-    //checking the followers have to be here since you are passing the data from the view /Profile/details
-    public function checkIfFollowing($profile_id){
-		$follow = new \app\models\Follow();
-		$follow->follower_id = $_SESSION['user_id'];
-		$follow->followed_id = $profile_id;
 
-		$boolean = $follow->isFollowing();
-
-		return $boolean;	
-	}
 
 }

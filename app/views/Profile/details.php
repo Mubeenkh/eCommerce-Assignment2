@@ -72,6 +72,10 @@
 					$this->view('Publication/posts', $publication);
 				}
 			?>
-		
+	</div>
+
+		<div style="width: 400px;">
+			
+		</div>	
 	<!-- </div> -->
 <?php $this->view('shared/footer'); ?>

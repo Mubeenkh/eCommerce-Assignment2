@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2023 at 08:21 AM
+-- Generation Time: Mar 14, 2023 at 03:50 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -36,6 +36,21 @@ CREATE TABLE `follow` (
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `follow`
+--
+
+INSERT INTO `follow` (`follower_id`, `followed_id`, `timestamp`) VALUES
+(1, 3, '2023-03-14 02:46:13'),
+(1, 5, '2023-03-14 02:46:18'),
+(2, 1, '2023-03-14 02:46:51'),
+(2, 4, '2023-03-14 02:46:44'),
+(2, 5, '2023-03-14 02:46:39'),
+(3, 5, '2023-03-14 02:47:10'),
+(5, 2, '2023-03-14 02:47:52'),
+(5, 3, '2023-03-14 02:48:25'),
+(5, 4, '2023-03-14 02:48:19');
+
 -- --------------------------------------------------------
 
 --
@@ -56,8 +71,11 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`user_id`, `first_name`, `middle_name`, `last_name`, `picture`) VALUES
-(1, 'Mubeen', 'Duckling', 'Khan', ''),
-(2, 'Rachelle', 'Secret', 'Badua', '');
+(1, 'Mubeen', 'Duckling', 'Khan', '1-640fde43e9f71.png'),
+(2, 'Rachelle', 'Secret', 'Badua', '2-640fe0a5d984c.png'),
+(3, 'Mert', 'something', 'Salvador', '3-640fdeb97406d.png'),
+(4, 'Phill', '', 'idk', '4-640fdf2d8863a.png'),
+(5, 'Vinh', 'idk', '', '5-640fdf94ac254.png');
 
 -- --------------------------------------------------------
 
@@ -79,12 +97,18 @@ CREATE TABLE `publication` (
 --
 
 INSERT INTO `publication` (`publication_id`, `profile_id`, `picture`, `caption`, `timestamp`) VALUES
-(2, 1, '1-640d0b3e00760.png', 'testing2', '2023-03-11 23:14:06'),
 (3, 2, '2-640d0c3ec45e1.png', 'Dino', '2023-03-11 23:18:23'),
 (4, 1, '1-640d36752e801.png', 'help', '2023-03-12 02:18:29'),
 (6, 2, '2-640d6157a76e6.png', 'Bread', '2023-03-12 05:34:22'),
 (7, 2, '2-640d658fc0894.png', 'Happy Kittyyyy', '2023-03-12 05:39:29'),
-(8, 1, '1-640d68abb7252.png', 'KITTYYYYYYY', '2023-03-12 05:52:43');
+(8, 1, '1-640d68abb7252.png', 'KITTYYYYYYY', '2023-03-12 05:52:43'),
+(9, 3, '3-640fdecc03718.png', 'i wanna give up', '2023-03-14 02:41:16'),
+(10, 3, '3-640fded6a887a.png', 'merrrt', '2023-03-14 02:41:26'),
+(11, 4, '4-640fdf39c28dd.jpg', 'huh', '2023-03-14 02:43:05'),
+(12, 4, '4-640fdf4a9ba11.jpg', 'aloha', '2023-03-14 02:43:22'),
+(13, 5, '5-640fdf9c2fa51.jpg', 'seggrs', '2023-03-14 02:44:44'),
+(14, 5, '5-640fdfa54f2fb.jpg', 'fsdfsfsdf', '2023-03-14 02:44:53'),
+(16, 5, '5-640fdfc0f3d3d.jpg', 'yjhfgtdrs', '2023-03-14 02:45:21');
 
 -- --------------------------------------------------------
 
@@ -105,7 +129,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `password_hash`) VALUES
 (1, 'Mubeen', '$2y$10$CyPOiMzu1Uo2vn4qYMK1VuvQ2o.xGVap1a4SDCgIAv36vdybJuo2u'),
-(2, 'Rachelle', '$2y$10$XhtLKVxVs5UiAG3ZyE/Fzu/T/jz2qYkitIEflHNFGwp.vFYBqjHv.');
+(2, 'Rachelle', '$2y$10$XhtLKVxVs5UiAG3ZyE/Fzu/T/jz2qYkitIEflHNFGwp.vFYBqjHv.'),
+(3, 'Mert', '$2y$10$kHLHxeLyAioODekv5IwfyunL5Cn65qi1Y8LysVoSY5V.R4uTRRcu2'),
+(4, 'Phill', '$2y$10$G4Gv2eJ3a2zRQFfiRYeM/OTrIKQ18vvKYOMmaJVO7z/F/8JcuuE2y'),
+(5, 'Vinh', '$2y$10$7Fv8EQaOlX.REUFgEzLK/.ZXajcPboFwWcFTE0YUxDuM92peANu46');
 
 --
 -- Indexes for dumped tables
@@ -146,13 +173,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

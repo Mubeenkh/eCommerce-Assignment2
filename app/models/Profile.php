@@ -64,19 +64,19 @@ class Profile extends \app\core\Model{
 
 /////////////////////
 
-	// public function get($user_id){
+	public function get($user_id){
 
-	// 	$SQL = "SELECT * FROM profile WHERE user_id=:user_id";
+		$SQL = "SELECT * FROM profile WHERE user_id=:user_id";
 
-	// 	$STH = $this->connection->prepare($SQL);
+		$STH = $this->connection->prepare($SQL);
 
-	// 	$STH->execute(['user_id'=>$user_id]);
+		$STH->execute(['user_id'=>$user_id]);
 
-	// 	$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
+		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
 
-	// 	return $STH->fetch();
+		return $STH->fetch();
 
-	// }
+	}
 
 	public function getPublications($user_id){
 		$SQL = "SELECT * FROM publication 
@@ -99,6 +99,16 @@ class Profile extends \app\core\Model{
 		$STH->execute();
 		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
 		return $STH->fetchAll();
+	}
+
+
+	public function getFollowingPublication($user_id)
+	{
+		$SQL = "SELECT p.publication_id, p.picture, u.first_name, u.last_name
+				FROM follow f
+				JOIN profile u ON f.followed_id = u.user_id
+				JOIN publication p ON u.user_id = p.profile_id
+				WHERE f.follower_id = u.user_id";
 	}
 	
 
