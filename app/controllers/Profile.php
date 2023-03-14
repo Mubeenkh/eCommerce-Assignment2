@@ -43,18 +43,6 @@ class Profile extends \app\core\Controller{
 
 
 ////////////////////////////////
-	// public function getMyFollowers($profile_id)
-	// {
-	// 	$follow = new \app\models\Follow();
-	// 	$follow->follower_id = $_SESSION['user_id'];
-	// 	$follow->followed_id = $profile_id;
-
-	// 	$this->view('Follow/index', $follow);
-
-	// }
-
-
-
 	
 	#[\app\filters\Login]
 	public function create(){

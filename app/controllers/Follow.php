@@ -3,6 +3,14 @@ namespace app\controllers;
 
 class Follow extends \app\core\Controller{
 
+	public function index()
+	{
+		$follow = new \app\models\Follow();
+		$follow->getFollowingPublication();
+
+		$this->view('Follow/index',$follow);
+	}
+
 
 	//following someone
 	public function followUser($following)
@@ -29,8 +37,5 @@ class Follow extends \app\core\Controller{
 		$follow->unfollowUser();
 		header('location:/Profile/details/' . $following .'?success=Successfully unfollowed');
 	}
-	
-	
-
 
 }

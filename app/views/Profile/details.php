@@ -74,8 +74,51 @@
 			?>
 	</div>
 
-		<div style="width: 400px;">
+
+	<div style="width: 500px;" class="p-3 card">
+		<div style="height: 120px;">
 			
-		</div>	
+		</div>
+		<hr>
+		<?php
+			//$data here are the publications
+			$profile = new \app\models\Profile();
+
+			$follow = new \app\models\Follow();
+
+			// $current = $follow->getFollowing();
+			$current = $follow->getFollowing(); 
+
+			foreach ($current as $publication) {
+				// $this->view('Publication/posts', $publication);
+		?>		
+				<div class=" p-2 m-3 shadow-lg p-3 mt-6 bg-white rounded text-center justify-content-center" style="max-width: 250px; max-height: 250px;" >
+
+					<img class="col-sm-10 card" src="/images/<?= $publication->picture ?>" style=" max-width:100px; max-height:100px; ">
+					<p>
+						<a href='/Profile/details/<?=$publication->user_id ?>'>
+
+							<b>
+								<?=$publication->first_name ?> 
+								<?=$publication->middle_name ?> 
+								<?=$publication->last_name ?>
+							</b>
+
+						</a>
+					</p>
+				</div>
+				<hr>
+		<?php
+			}
+				
+		?>
+
+		
+	</div>	
+
+		
+	</div>	
+
+
 	<!-- </div> -->
 <?php $this->view('shared/footer'); ?>

@@ -56,6 +56,36 @@ class Follow extends \app\core\Model{
 		return $STH->fetch();
 	}
 
+	public function getFollowingPublication()
+	{
+		$SQL = "SELECT p.publication_id, p.caption, p.picture, p.timestamp, u.user_id , u.first_name, u.last_name, u.middle_name
+				FROM follow f
+				JOIN profile u ON f.followed_id = u.user_id
+				JOIN publication p ON u.user_id = p.profile_id
+				WHERE f.follower_id = :current_id 
+				ORDER BY p.timestamp DESC";
 
+		$STH = $this->connection->prepare($SQL);
+
+		$STH->execute(['current_id'=>$_SESSION['user_id']]);
+		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Follow');
+		
+		return $STH->fetchAll();
+	}
+
+	public function getFollowing()
+	{
+		$SQL = "SELECT p.picture, p.first_name, p.middle_name, p.last_name
+				FROM profile p
+				JOIN follow f ON f.follower_id = p.user_id
+				WHERE f.followed_id = :current_id";
+
+		$STH = $this->connection->prepare($SQL);
+
+		$STH->execute(['current_id'=>$_SESSION['user_id']]);
+		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Follow');
+		
+		return $STH->fetchAll();
+	}
 	
 }

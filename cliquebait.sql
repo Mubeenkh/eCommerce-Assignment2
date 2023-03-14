@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2023 at 03:50 AM
+-- Generation Time: Mar 14, 2023 at 08:05 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -41,10 +41,9 @@ CREATE TABLE `follow` (
 --
 
 INSERT INTO `follow` (`follower_id`, `followed_id`, `timestamp`) VALUES
-(1, 3, '2023-03-14 02:46:13'),
-(1, 5, '2023-03-14 02:46:18'),
+(1, 4, '2023-03-14 05:44:12'),
+(1, 5, '2023-03-14 05:37:02'),
 (2, 1, '2023-03-14 02:46:51'),
-(2, 4, '2023-03-14 02:46:44'),
 (2, 5, '2023-03-14 02:46:39'),
 (3, 5, '2023-03-14 02:47:10'),
 (5, 2, '2023-03-14 02:47:52'),

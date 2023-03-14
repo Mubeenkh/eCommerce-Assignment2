@@ -101,15 +101,8 @@ class Profile extends \app\core\Model{
 		return $STH->fetchAll();
 	}
 
-
-	public function getFollowingPublication($user_id)
-	{
-		$SQL = "SELECT p.publication_id, p.picture, u.first_name, u.last_name
-				FROM follow f
-				JOIN profile u ON f.followed_id = u.user_id
-				JOIN publication p ON u.user_id = p.profile_id
-				WHERE f.follower_id = u.user_id";
-	}
+	
+	
 	
 
 
