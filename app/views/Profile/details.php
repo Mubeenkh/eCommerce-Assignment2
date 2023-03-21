@@ -81,27 +81,22 @@
 		</div>
 		<hr>
 		<?php
-			//$data here are the publications
-			$profile = new \app\models\Profile();
+			//$data here are the profile
 
-			$follow = new \app\models\Follow();
+			$current = $data->getFollowing($data->user_id); 
 
-			// $current = $follow->getFollowing();
-			$current = $follow->getFollowing(); 
-
-			foreach ($current as $publication) {
-				// $this->view('Publication/posts', $publication);
+			foreach ($current as $profile) {
 		?>		
 				<div class=" p-2 m-3 shadow-lg p-3 mt-6 bg-white rounded text-center justify-content-center" style="max-width: 250px; max-height: 250px;" >
 
-					<img class="col-sm-10 card" src="/images/<?= $publication->picture ?>" style=" max-width:100px; max-height:100px; ">
+					<img class="col-sm-10 card" src="/images/<?= $profile->picture ?>" style=" max-width:100px; max-height:100px; ">
 					<p>
-						<a href='/Profile/details/<?=$publication->user_id ?>'>
+						<a href='/Profile/details/<?=$profile->user_id ?>'>
 
 							<b>
-								<?=$publication->first_name ?> 
-								<?=$publication->middle_name ?> 
-								<?=$publication->last_name ?>
+								<?=$profile->first_name ?> 
+								<?=$profile->middle_name ?> 
+								<?=$profile->last_name ?>
 							</b>
 
 						</a>

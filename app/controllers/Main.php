@@ -12,4 +12,12 @@ class Main extends \app\core\Controller{
 
 	}
 
+	public function follow(){
+		$publication = new \app\models\Publication();
+		$publications = $publication->getFollowingPublication();
+		$this->view('Main/index', $publications);
+
+
+	}
+
 }

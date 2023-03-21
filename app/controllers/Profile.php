@@ -20,6 +20,7 @@ class Profile extends \app\core\Controller{
 	
 	} 
 	//this function allows you to see the users profile by 
+	#[\app\filters\Login]
 	public function details($user_id){
 
 		$profile = new \app\models\Profile();

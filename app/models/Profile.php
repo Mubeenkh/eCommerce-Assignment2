@@ -102,7 +102,20 @@ class Profile extends \app\core\Model{
 	}
 
 	
-	
+	public function getFollowing($followed_id)
+	{
+		$SQL = "SELECT p.picture, p.first_name, p.middle_name, p.last_name
+				FROM profile p
+				JOIN follow f ON f.follower_id = p.user_id
+				WHERE f.followed_id = :followed_id";
+
+		$STH = $this->connection->prepare($SQL);
+
+		$STH->execute(['followed_id'=>$followed_id]);
+		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
+		
+		return $STH->fetchAll();
+	}
 	
 
 
