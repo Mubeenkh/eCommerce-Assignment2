@@ -104,7 +104,7 @@ class Profile extends \app\core\Model{
 	
 	public function getFollowing($followed_id)
 	{
-		$SQL = "SELECT p.picture, p.first_name, p.middle_name, p.last_name
+		$SQL = "SELECT p.picture, p.user_id, p.first_name, p.middle_name, p.last_name
 				FROM profile p
 				JOIN follow f ON f.follower_id = p.user_id
 				WHERE f.followed_id = :followed_id";

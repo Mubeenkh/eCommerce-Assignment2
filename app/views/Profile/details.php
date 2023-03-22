@@ -26,6 +26,8 @@
 				</dl>
 				
 				<?php
+				if (isset($_SESSION['user_id'])) {
+				
 					if($_SESSION['user_id'] != $data->user_id){
 
 						//$this here is profile
@@ -39,7 +41,9 @@
 							echo '<a href=',"/Follow/followUser/$data->user_id",'>Follow</a>';
 							
 						}
-					}
+					}	
+				}
+				
 				?>
 				
 
@@ -76,8 +80,8 @@
 
 
 	<div style="width: 500px;" class="p-3 card">
-		<div style="height: 120px;">
-			
+		<div style="height: 100px;" class="">
+			<h1><?= $data->first_name?>'s Followers :</h1>
 		</div>
 		<hr>
 		<?php

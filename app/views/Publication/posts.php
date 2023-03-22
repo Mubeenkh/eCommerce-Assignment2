@@ -14,7 +14,7 @@
 		<div class="row">
 
 			<div class="col-md-4">
-				<img class="col-sm-10 card" src="/images/<?= $data->picture ?>" style=" max-width:300px; max-height:300px;">
+				<img class="col-sm-10 card" src="/images/<?= $data->picture ?>" style="max-width:300px; max-height:300px;">
 			</div>
 
 			<div class="col-md-8 ml-auto card">

@@ -128,16 +128,22 @@ class Publication extends \app\core\Model{
 
 	public function getFollowingPublication()
 	{
-		$SQL = "SELECT p.publication_id, p.caption, p.picture, p.timestamp, u.user_id , u.first_name, u.last_name, u.middle_name
-				FROM follow f
-				JOIN profile u ON f.followed_id = u.user_id
-				JOIN publication p ON u.user_id = p.profile_id
+		// $SQL = "SELECT p.publication_id, p.caption, p.picture, p.timestamp, u.user_id , u.first_name, u.last_name, u.middle_name
+		// 		FROM follow f
+		// 		JOIN profile u ON f.followed_id = u.user_id
+		// 		JOIN publication p ON u.user_id = p.profile_id
+		// 		WHERE f.follower_id = :current_id 
+		// 		ORDER BY p.timestamp DESC";
+
+		$SQL = "SELECT * FROM publication p 
+				JOIN follow f ON f.followed_id = p.profile_id
 				WHERE f.follower_id = :current_id 
 				ORDER BY p.timestamp DESC";
-
+				
 		$STH = $this->connection->prepare($SQL);
 
 		$STH->execute(['current_id'=>$_SESSION['user_id']]);
+
 		$STH->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Follow');
 		
 		return $STH->fetchAll();

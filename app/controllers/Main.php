@@ -11,7 +11,8 @@ class Main extends \app\core\Controller{
 		$this->view('Main/index', $publications);
 
 	}
-
+	
+	#[\app\filters\Login]
 	public function follow(){
 		$publication = new \app\models\Publication();
 		$publications = $publication->getFollowingPublication();

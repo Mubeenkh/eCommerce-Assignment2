@@ -8,7 +8,7 @@ class Login implements \app\core\AccessFilter{	//provides the interface
 	public function execute(){
 
 		if(!isset($_SESSION['user_id'])){
-			header('location:/User/index');
+			header('location:/User/index?error= Please Login');
 			return true;	// not enough, we have to tell the router to do something
 							//return true, if the person is not allwed to be there
 		}

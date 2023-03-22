@@ -1,4 +1,4 @@
-<?php $this->view('shared/header','Followers'); ?>
+<!-- <?php $this->view('shared/header','Followers'); ?>
 	
 
 	<div class="px-5 m-5 text-center">
@@ -65,4 +65,4 @@
 	?>
 
 	
-<?php $this->view('shared/footer'); ?>
+<?php $this->view('shared/footer'); ?> -->

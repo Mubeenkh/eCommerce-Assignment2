@@ -3,17 +3,17 @@ namespace app\controllers;
 
 class Follow extends \app\core\Controller{
 
-	#[\app\filters\Login]
-	public function index()
-	{
-		$follow = new \app\models\Follow();
-		$follow->getFollowingPublication();
-
-		$this->view('Follow/index',$follow);
-	}
+	//useless now
+	// public function index()
+	// {
+	// 	$follow = new \app\models\Follow();
+	// 	$follow->getFollowingPublication();
+	// 	$this->view('Follow/index',$follow);
+	// }
 
 
 	//following someone
+	#[\app\filters\Login]
 	public function followUser($following)
 	{
 		
@@ -26,7 +26,8 @@ class Follow extends \app\core\Controller{
 		header('location:/Profile/details/' . $following .'?success=Successfully followed');
 	
 	}
-
+	
+	#[\app\filters\Login]
 	public function unfollowUser($following)
 	{
 		

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2023 at 08:05 AM
+-- Generation Time: Mar 22, 2023 at 04:01 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -41,14 +41,14 @@ CREATE TABLE `follow` (
 --
 
 INSERT INTO `follow` (`follower_id`, `followed_id`, `timestamp`) VALUES
-(1, 4, '2023-03-14 05:44:12'),
-(1, 5, '2023-03-14 05:37:02'),
-(2, 1, '2023-03-14 02:46:51'),
-(2, 5, '2023-03-14 02:46:39'),
+(1, 2, '2023-03-22 02:33:33'),
+(2, 1, '2023-03-22 00:04:55'),
 (3, 5, '2023-03-14 02:47:10'),
 (5, 2, '2023-03-14 02:47:52'),
 (5, 3, '2023-03-14 02:48:25'),
-(5, 4, '2023-03-14 02:48:19');
+(5, 4, '2023-03-14 02:48:19'),
+(6, 1, '2023-03-22 02:44:07'),
+(6, 5, '2023-03-22 02:43:59');
 
 -- --------------------------------------------------------
 
@@ -74,7 +74,8 @@ INSERT INTO `profile` (`user_id`, `first_name`, `middle_name`, `last_name`, `pic
 (2, 'Rachelle', 'Secret', 'Badua', '2-640fe0a5d984c.png'),
 (3, 'Mert', 'something', 'Salvador', '3-640fdeb97406d.png'),
 (4, 'Phill', '', 'idk', '4-640fdf2d8863a.png'),
-(5, 'Vinh', 'idk', '', '5-640fdf94ac254.png');
+(5, 'Vinh', 'idk', '', '5-640fdf94ac254.png'),
+(6, 'Someone', '', 'new', '6-641a6a15801c3.png');
 
 -- --------------------------------------------------------
 
@@ -100,7 +101,7 @@ INSERT INTO `publication` (`publication_id`, `profile_id`, `picture`, `caption`,
 (4, 1, '1-640d36752e801.png', 'help', '2023-03-12 02:18:29'),
 (6, 2, '2-640d6157a76e6.png', 'Bread', '2023-03-12 05:34:22'),
 (7, 2, '2-640d658fc0894.png', 'Happy Kittyyyy', '2023-03-12 05:39:29'),
-(8, 1, '1-640d68abb7252.png', 'KITTYYYYYYY', '2023-03-12 05:52:43'),
+(8, 1, '1-640d68abb7252.png', 'KITTYYYYYYYY', '2023-03-22 02:47:30'),
 (9, 3, '3-640fdecc03718.png', 'i wanna give up', '2023-03-14 02:41:16'),
 (10, 3, '3-640fded6a887a.png', 'merrrt', '2023-03-14 02:41:26'),
 (11, 4, '4-640fdf39c28dd.jpg', 'huh', '2023-03-14 02:43:05'),
@@ -131,7 +132,8 @@ INSERT INTO `user` (`user_id`, `username`, `password_hash`) VALUES
 (2, 'Rachelle', '$2y$10$XhtLKVxVs5UiAG3ZyE/Fzu/T/jz2qYkitIEflHNFGwp.vFYBqjHv.'),
 (3, 'Mert', '$2y$10$kHLHxeLyAioODekv5IwfyunL5Cn65qi1Y8LysVoSY5V.R4uTRRcu2'),
 (4, 'Phill', '$2y$10$G4Gv2eJ3a2zRQFfiRYeM/OTrIKQ18vvKYOMmaJVO7z/F/8JcuuE2y'),
-(5, 'Vinh', '$2y$10$7Fv8EQaOlX.REUFgEzLK/.ZXajcPboFwWcFTE0YUxDuM92peANu46');
+(5, 'Vinh', '$2y$10$7Fv8EQaOlX.REUFgEzLK/.ZXajcPboFwWcFTE0YUxDuM92peANu46'),
+(6, 'Someone', '$2y$10$O/pZqzqDzG3DWHct8uaSfe2v41NbhabMRmtsRb1UfShjTh3g.iGli');
 
 --
 -- Indexes for dumped tables
@@ -172,13 +174,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

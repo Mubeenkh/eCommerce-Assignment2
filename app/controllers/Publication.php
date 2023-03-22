@@ -121,7 +121,7 @@ class Publication extends \app\core\Controller{
             unlink("images/$publication->picture");
             $publication->deletePost();
         }
-        header('location:/Profile/index/');
+        header('location:/Profile/index?success=Successfully deleted the post');
     }
 
     public function edit($publication_id)
